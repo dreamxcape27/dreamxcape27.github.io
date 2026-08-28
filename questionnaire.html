@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4f7f6" />
+    <title>评估进行中 · dreamxcape</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="questionnaire.js" defer></script>
+  </head>
+  <body class="assessment-page">
+    <div class="assessment-shell">
+      <header class="assessment-header">
+        <a class="wordmark" href="./" aria-label="dreamxcape 梦境公司项目首页">
+          <span class="wordmark-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="wordmark-text"><strong>dreamxcape</strong><small>梦境公司</small></span>
+        </a>
+        <span class="study-code">DX-27</span>
+      </header>
+
+      <div class="progress-region" aria-label="评估进度">
+        <div class="progress-copy"><span id="progress-label">基本信息</span><span id="progress-count">01 / 24</span></div>
+        <div class="progress-track"><span id="progress-bar"></span></div>
+      </div>
+
+      <main class="question-stage" id="question-stage">
+        <section class="question-panel is-active" id="profile-panel" aria-labelledby="profile-title">
+          <p class="question-kicker">第 1 部分·基本信息</p>
+          <h1 id="profile-title">请先告诉我们您的基本信息。</h1>
+          <p class="question-help">这些信息将用于对评估结果进行基础校准。</p>
+
+          <form id="profile-form" novalidate>
+            <div class="field-group">
+              <label for="age">年龄</label>
+              <div class="input-with-suffix">
+                <input id="age" name="age" type="number" inputmode="numeric" min="12" max="100" placeholder="请输入" required />
+                <span>岁</span>
+              </div>
+              <p class="field-error" id="age-error" aria-live="polite"></p>
+            </div>
+
+            <fieldset class="field-group">
+              <legend>性别</legend>
+              <div class="choice-grid">
+                <label class="choice"><input type="radio" name="gender" value="female" required /><span>女</span></label>
+                <label class="choice"><input type="radio" name="gender" value="male" /><span>男</span></label>
+                <label class="choice"><input type="radio" name="gender" value="other" /><span>其他</span></label>
+                <label class="choice"><input type="radio" name="gender" value="private" /><span>不愿透露</span></label>
+              </div>
+              <p class="field-error" id="gender-error" aria-live="polite"></p>
+            </fieldset>
+
+            <div class="field-group name-field">
+              <label for="name">您的名字</label>
+              <input id="name" name="name" type="text" autocomplete="name" maxlength="40" placeholder="请输入您希望被称呼的名字" required />
+              <p class="field-hint">仅用于本次评估中的称呼。</p>
+              <p class="field-error" id="name-error" aria-live="polite"></p>
+            </div>
+
+            <button class="primary-button assessment-button" type="submit"><span>确认并继续</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+          </form>
+        </section>
+
+        <section class="question-panel" id="alias-panel" aria-labelledby="alias-title" hidden>
+          <p class="question-kicker">信息确认</p>
+          <div class="integrity-notice"><span aria-hidden="true">!</span><p>为了保证评估的有效性，请对我们保持绝对的坦诚。</p></div>
+          <h1 id="alias-title">您还有别的名字吗？</h1>
+          <p class="question-help">请输入曾经使用过的名字、别名或称呼。如果没有，请填写“无”。</p>
+          <form id="alias-form" novalidate>
+            <div class="field-group">
+              <label for="alias">其他名字</label>
+              <input id="alias" name="alias" type="text" maxlength="40" autocomplete="off" placeholder="请输入" required />
+              <p class="field-error" id="alias-error" aria-live="polite"></p>
+            </div>
+            <button class="primary-button assessment-button" type="submit"><span>确认</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+          </form>
+        </section>
+
+        <section class="question-panel rejection-panel" id="rejection-panel" aria-labelledby="rejection-title" hidden>
+          <p class="system-label">RESPONSE MISMATCH</p>
+          <h1 id="rejection-title">不对</h1>
+          <form id="rejection-form" novalidate>
+            <div class="field-group">
+              <label class="visually-hidden" for="corrected-name">重新输入名字</label>
+              <input id="corrected-name" name="corrected-name" type="text" maxlength="40" autocomplete="off" aria-describedby="rejection-error" required />
+              <p class="field-error" id="rejection-error" aria-live="polite"></p>
+            </div>
+            <button class="primary-button assessment-button danger-button" type="submit"><span>重新提交</span></button>
+          </form>
+        </section>
+
+        <section class="question-panel" id="normal-panel" aria-labelledby="normal-title" hidden>
+          <p class="question-kicker" id="normal-kicker">第 2 部分·近期状态</p>
+          <h1 id="normal-title"></h1>
+          <p class="question-help" id="normal-help"></p>
+          <div class="answer-list" id="normal-answers" role="group" aria-labelledby="normal-title"></div>
+        </section>
+
+        <section class="question-panel section-complete" id="section-complete-panel" aria-labelledby="section-complete-title" hidden>
+          <span class="completion-mark" aria-hidden="true">✓</span>
+          <p class="question-kicker">评估进度</p>
+          <h1 id="section-complete-title">近期状态评估已完成</h1>
+          <p class="question-help">接下来将进入“认知与感知”部分。该部分需要您回忆日常生活中的一些细节，请继续保持独立作答。</p>
+          <div class="section-summary"><span>已完成</span><strong>5</strong><span>个项目</span></div>
+          <button class="primary-button assessment-button" id="continue-section" type="button"><span>继续下一部分</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        </section>
+
+        <section class="question-panel identity-panel" id="identity-panel" aria-labelledby="identity-title" hidden>
+          <p class="identity-index">IDENTITY CHECK</p>
+          <h1 id="identity-title">你知道我是谁吗？</h1>
+          <div class="answer-list corrupted-answers" id="identity-answers" role="group" aria-labelledby="identity-title">
+            <button type="button" lang="und">縺此･縺它ｫ縺惹ｿ</button>
+            <button type="button" lang="und">譁｡蟄励ｲ縺輔く</button>
+            <button type="button" lang="und">遉私ｒ隕豺､繧ｿ</button>
+          </div>
+        </section>
+
+        <section class="question-panel section-entry" id="cognition-entry-panel" aria-labelledby="cognition-entry-title" hidden>
+          <p class="question-kicker">第 3 部分</p>
+          <h1 id="cognition-entry-title">认知与感知</h1>
+          <p class="question-help">本部分将了解您对记忆、环境与日常信息的感受。请根据第一直觉作答，无需过度思考。</p>
+          <div class="section-meta"><span>4–6 个项目</span><span>预计用时 1 分钟</span></div>
+          <button class="primary-button assessment-button" id="begin-cognition" type="button"><span>开始本部分</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        </section>
+
+        <section class="question-panel" id="cognition-panel" aria-labelledby="cognition-title" hidden>
+          <p class="question-kicker">第 3 部分·认知与感知</p>
+          <h1 id="cognition-title"></h1>
+          <p class="question-help" id="cognition-help"></p>
+          <div class="answer-list" id="cognition-answers" role="group" aria-labelledby="cognition-title"></div>
+        </section>
+
+        <section class="question-panel door-panel" id="door-panel" aria-labelledby="door-title" hidden>
+          <p class="question-kicker">第 3 部分·认知与感知</p>
+          <h1 id="door-title">你关门了吗？</h1>
+          <div class="answer-list" id="door-answers" role="group" aria-labelledby="door-title">
+            <button type="button">是</button><button type="button">否</button><button type="button">不确定</button>
+          </div>
+          <div class="door-confirmation" id="door-confirmation" hidden>
+            <div class="confirmation-rule"></div>
+            <h2>你确定吗？</h2>
+            <div class="confirmation-actions">
+              <button type="button">确定</button><button type="button">不确定</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="question-panel perception-anomaly" id="perception-anomaly-panel" aria-labelledby="perception-anomaly-title" hidden>
+          <p class="anomaly-counter">10 / 24</p>
+          <h1 id="perception-anomaly-title">你还记得它吗？</h1>
+          <div class="answer-list anomaly-answers" id="anomaly-answers" aria-hidden="true">
+            <button type="button" tabindex="-1">縺ｿ縺臥ｿ</button>
+            <button type="button" tabindex="-1">譁｢螟ｱ縺</button>
+            <button type="button" tabindex="-1">遉私ｒ繧ｿ</button>
+          </div>
+          <p class="anomaly-status">CALIBRATING PERCEPTION</p>
+        </section>
+
+        <section class="question-panel section-four-intro" id="section-four-intro-panel" aria-labelledby="section-four-title" hidden>
+          <p class="question-kicker" id="section-four-kicker">第 4 部分·个体内在体验</p>
+          <h1 id="section-four-title">关于接下来的评估</h1>
+          <div class="reading-copy" aria-live="off">
+            <p id="intro-copy-one">本部分将了解您在独处、陪伴与内在对话中的真实感受。这些问题可能需要比之前更多的回忆，请给自己足够的时间。</p>
+            <p id="intro-copy-two">请在安静、不受打扰的环境中完成本部分。阅读时请保持注意，并仔细聆听系统提示，以确保每项信息都被正确记录。</p>
+            <p id="intro-copy-three">如果某些问题令您感到陌生，请不要立即离开页面。稍作停留，根据第一直觉选择答案，评估将自动继续。</p>
+          </div>
+          <div class="auto-continue" id="auto-continue"><span></span>正在准备本部分…</div>
+        </section>
+
+        <section class="question-panel companion-question" id="companion-question-panel" aria-labelledby="companion-title" hidden>
+          <p class="companion-index">？ / ???</p>
+          <h1 id="companion-title">你喜欢我陪着你吗？</h1>
+          <div class="answer-list companion-answers" id="companion-answers" role="group" aria-labelledby="companion-title">
+            <button type="button">喜欢</button>
+            <button type="button">不喜欢</button>
+            <button type="button">你是谁？</button>
+          </div>
+        </section>
+
+        <section class="question-panel companion-question" id="presence-question-panel" aria-labelledby="presence-title" hidden>
+          <p class="companion-index">13 / 12</p>
+          <h1 id="presence-title">你独处时，也会感觉房间里还有别人吗？</h1>
+          <div class="answer-list companion-answers" id="presence-answers" role="group" aria-labelledby="presence-title">
+            <button type="button">从不</button><button type="button">偶尔</button><button type="button">经常</button><button type="button">我不是一个人</button>
+          </div>
+        </section>
+
+        <section class="question-panel turnaround-panel" id="turnaround-panel" aria-labelledby="turnaround-title" hidden>
+          <h1 id="turnaround-title">回头</h1>
+        </section>
+
+        <section class="question-panel identity-rewrite-panel" id="identity-rewrite-panel" aria-labelledby="identity-rewrite-title" hidden>
+          <p class="companion-index">?? / ??</p>
+          <h1 id="identity-rewrite-title">我是谁？</h1>
+          <div class="answer-list companion-answers name-answers" id="name-answers" role="group" aria-labelledby="identity-rewrite-title" hidden></div>
+        </section>
+
+        <section class="question-panel companion-question meeting-panel" id="meeting-panel" aria-labelledby="meeting-title" hidden>
+          <p class="companion-index">27 / 00</p>
+          <h1 id="meeting-title">你希望马上就能见到我吗？</h1>
+          <div class="answer-list companion-answers trapped-answers" id="meeting-answers" role="group" aria-labelledby="meeting-title">
+            <button type="button" data-answer="yes">希望</button><button type="button" data-answer="no">不希望</button>
+          </div>
+          <p class="input-locked-message">正在同步您的回答…</p>
+        </section>
+
+        <section class="question-panel seen-panel" id="seen-panel" aria-labelledby="seen-title" hidden>
+          <p class="companion-index">LIVE</p>
+          <h1 id="seen-title">我看到你了。</h1>
+          <span class="recording-indicator" aria-hidden="true"></span>
+        </section>
+
+        <section class="question-panel forever-panel" id="forever-panel" aria-labelledby="forever-title" hidden>
+          <div class="barrage-layer" id="barrage-layer" aria-hidden="true"></div>
+          <div class="forever-dialog">
+            <p class="companion-index">FOREVER / FOREVER</p>
+            <h1 id="forever-title">你愿意和我永远在一起吗？</h1>
+            <label for="forever-answer">请输入您的回答</label>
+            <input id="forever-answer" type="text" readonly aria-readonly="true" />
+            <button id="forever-submit" type="button" tabindex="-1">提交</button>
+          </div>
+        </section>
+
+        <section class="question-panel reboot-panel" id="reboot-panel" aria-labelledby="reboot-title" hidden>
+          <div class="reboot-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+          <h1 id="reboot-title">dreamxcape</h1>
+          <div class="boot-log" id="boot-log" aria-live="polite"><p>正在重新启动评估系统…</p></div>
+        </section>
+
+        <section class="question-panel error-panel" id="error-panel" aria-labelledby="error-title" hidden>
+          <p class="error-code">404</p>
+          <h1 id="error-title">页面无法访问</h1>
+          <p class="error-copy" id="error-copy">未能找到请求的评估页面。<br />请稍后重试。</p>
+          <p class="error-reference">ERROR_REFERENCE: DX-27/CONNECTION_LOST</p>
+        </section>
+      </main>
+
+      <footer class="assessment-footer"><span>dreamxcape · DX-27</span><span id="connection-status"><i></i>已建立安全连接</span></footer>
+    </div>
+    <div class="screen-flash" id="screen-flash" aria-hidden="true"></div>
+    <div class="dialog-backdrop" id="companion-dialog" hidden>
+      <section class="false-dialog" role="dialog" aria-modal="true" aria-labelledby="companion-dialog-title">
+        <span class="dialog-signal" aria-hidden="true"></span>
+        <h2 id="companion-dialog-title">我也喜欢。</h2>
+        <div class="permission-message">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v4M9 21h6"/></svg>
+          <p><small>提示</small><span>User:<b id="permission-user">X</b> 已获取麦克风权限。</span></p>
+        </div>
+      </section>
+    </div>
+    <div class="dialog-backdrop camera-backdrop" id="camera-dialog" hidden>
+      <section class="false-dialog camera-dialog" role="dialog" aria-modal="true" aria-labelledby="camera-dialog-title">
+        <p class="permission-origin">DREAMXCAPE SYSTEM</p>
+        <h2 id="camera-dialog-title">权限请求</h2>
+        <div class="camera-request">
+          <span class="camera-symbol" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 8h3l1.4-2h7.2L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+          </span>
+          <p>User:<b id="camera-user">縺ｿ�27</b> 申请访问摄像头及相册。</p>
+        </div>
+        <div class="permission-actions">
+          <button type="button" id="deny-camera">拒绝</button>
+          <button type="button" id="allow-camera">同意</button>
+        </div>
+      </section>
+    </div>
+    <div class="fake-cursor" id="fake-cursor" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M4 2.5 19 15l-7 .8-4.2 5.7z"/></svg>
+    </div>
+  </body>
+</html>

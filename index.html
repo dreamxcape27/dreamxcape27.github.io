@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4f7f6" />
+    <meta name="description" content="心理状态与日常适应性评估" />
+    <title>心理状态评估</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header" aria-label="评估项目页眉">
+        <a class="wordmark" href="./" aria-label="dreamxcape 梦境公司项目首页">
+          <span class="wordmark-mark" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          <span class="wordmark-text">
+            <strong>dreamxcape</strong>
+            <small>梦境公司</small>
+          </span>
+        </a>
+        <span class="study-code">项目编号&nbsp; DX-27</span>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow">心理状态与日常适应性评估</p>
+          <h1 id="page-title">在开始之前</h1>
+          <p class="lead">
+            本评估用于了解您近期的情绪、睡眠、注意力与日常感受。
+            请根据过去两周内的真实体验作答。
+          </p>
+
+          <div class="summary-card" aria-label="评估概要">
+            <div class="summary-item">
+              <span class="summary-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
+              </span>
+              <span><small>预计用时</small><strong>3–5 分钟</strong></span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="m9 8 1.5 1.5L14 6M9 14h6M9 18h4"/></svg>
+              </span>
+              <span><small>评估内容</small><strong>24 个项目</strong></span>
+            </div>
+          </div>
+
+          <div class="instructions">
+            <h2>作答说明</h2>
+            <ul>
+              <li>评估中没有正确或错误答案。</li>
+              <li>请独立完成，并选择最接近您实际情况的选项。</li>
+              <li>开始后请尽量不要中途退出或切换页面。</li>
+            </ul>
+          </div>
+
+          <aside class="privacy-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            <p><strong>隐私说明</strong><br />您的作答仅用于生成本次评估结果，不会记录您的姓名或联系方式。</p>
+          </aside>
+
+          <label class="consent-row">
+            <input id="consent" type="checkbox" />
+            <span class="custom-check" aria-hidden="true"></span>
+            <span>我已阅读上述说明，并愿意开始评估。</span>
+          </label>
+
+          <button id="start-button" class="primary-button" type="button" disabled>
+            <span>开始评估</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+
+          <p class="disclaimer">本评估不构成医学诊断，也不能替代专业医疗建议。</p>
+        </section>
+      </main>
+
+      <footer>
+        <span>dreamxcape · 心理健康研究项目</span>
+        <span>2026 / 08</span>
+      </footer>
+    </div>
+  </body>
+</html>
